@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AlifQuotesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlifQuotesAPI.Controllers
 {
-    [Route("api/[controller/]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class QuotesController : ControllerBase
     {
+        public List<QuoteModel> Quotes;
+        public QuotesController()
+        {
+            Quotes = new List<QuoteModel>();
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -28,6 +35,7 @@ namespace AlifQuotesAPI.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+          
         }
 
         // PUT api/values/5
