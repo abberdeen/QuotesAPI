@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AlifQuotesAPI.Models;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
 
 namespace AlifQuotesAPI.Controllers
 {
@@ -22,7 +22,7 @@ namespace AlifQuotesAPI.Controllers
         [HttpGet]
         public ActionResult<List<QuoteModel>> Get()
         {
-            return _myService.Quotes;
+            return _myService.quotes;
         }
 
         // GET by id api/quotes/5
@@ -31,7 +31,7 @@ namespace AlifQuotesAPI.Controllers
         {
             if (Exists(id))           
             {
-                return _myService.Quotes[id];
+                return _myService.quotes[id];
             }
             return NotFound();
         }
@@ -40,7 +40,7 @@ namespace AlifQuotesAPI.Controllers
         [HttpGet("category/{category}")]
         public ActionResult<List<QuoteModel>> Get(string category)
         {
-           return _myService.Quotes.FindAll((QuoteModel q) => { return q.Category.ToLower() == category.ToLower(); });      
+           return _myService.quotes.FindAll((QuoteModel q) => { return q.Category.ToLower() == category.ToLower(); });      
         }
 
 
@@ -48,8 +48,8 @@ namespace AlifQuotesAPI.Controllers
         [HttpGet("random")]
         public ActionResult<QuoteModel> Random()
         { 
-            int RandomId = new Random().Next(0, _myService.Quotes.Count);
-            return _myService.Quotes[RandomId];
+            int RandomId = new Random().Next(0, _myService.quotes.Count);
+            return _myService.quotes[RandomId];
         }
 
         // POST api/quotes
@@ -58,7 +58,7 @@ namespace AlifQuotesAPI.Controllers
         {
             value.CreationTime = DateTime.Now;
             value.EditTime = DateTime.Now;
-            _myService.Quotes.Add(value);
+            _myService.quotes.Add(value);
         }
 
         // PUT api/quotes/5
@@ -67,7 +67,10 @@ namespace AlifQuotesAPI.Controllers
         {
             if (Exists(id)) 
             {
-                _myService.Quotes[id] = value;
+                var creationTime = _myService.quotes[id].CreationTime;
+                _myService.quotes[id] = value;
+                _myService.quotes[id].EditTime = DateTime.Now;
+                _myService.quotes[id].CreationTime = creationTime;
             }
             NotFound();
         }
@@ -78,13 +81,25 @@ namespace AlifQuotesAPI.Controllers
         {
             if (Exists(id))
             {
-                _myService.Quotes.RemoveAt(id);
+                _myService.quotes.RemoveAt(id);
             }
+        }
+
+        // DELETE api/quotes/clear
+        [HttpDelete("clear")]
+        public void DeleteByOffset()
+        { 
+            _myService.quotes.RemoveAll(IsHourElapsed);
         }
 
         private bool Exists(int id)
         {
-            return (id < _myService.Quotes.Count && id > -1);
+            return (id < _myService.quotes.Count && id > -1);
+        }
+
+        private bool IsHourElapsed(QuoteModel item) 
+        {
+            return DateTime.Now.Subtract(item.CreationTime).TotalMinutes > 60; 
         }
     }
 }

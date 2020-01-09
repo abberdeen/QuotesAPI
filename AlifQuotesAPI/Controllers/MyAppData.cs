@@ -12,6 +12,6 @@ namespace AlifQuotesAPI.Controllers
     /// </summary>
     public class MyAppData
     {
-        public List<QuoteModel> Quotes=new List<QuoteModel>();
+        public List<QuoteModel> quotes=new List<QuoteModel>();
     }
 }
