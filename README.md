@@ -1,13 +1,12 @@
 # AlifQuotesAPI
-Quotes management RESTful API with following technical properties:
+RESTful quotation management API with the following technical properties:
 * Language of development C# on .NET Core 3.1
-* Data exchange format between client and server uses JSON
+* JSON format is used to exchange data between the client and server
 * For preserving user data and app state between requests used Dependency Injection.
 
 ## Table of contents
 
 <!-- toc -->
-
 - [Getting started](#getting-started)
 - [Routes](#routes)
 - [Worker service](#worker-service)
@@ -25,12 +24,12 @@ POST /api/quotes
 
 #### Edit/Change quote: author, quote, category.
 ```
-PUT api/quotes/1
+PUT /api/quotes/1
 ```
 
 #### Delete a quote by ID.
 ```
-DELETE api/quotes/1
+DELETE /api/quotes/1
 ```
 
 #### Get all quotes.
@@ -40,12 +39,12 @@ GET /api/quotes
 
 #### Get all quotes by category.
 ```
-GET api/quotes/category/abc
+GET /api/quotes/category/abc
 ```
 
 #### Get a random quote.
 ```
-GET api/quotes/random
+GET /api/quotes/random
 ```
 ## Worker service
 
