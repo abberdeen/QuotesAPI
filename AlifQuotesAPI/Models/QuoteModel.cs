@@ -8,11 +8,19 @@ namespace AlifQuotesAPI.Models
 {
     public class QuoteModel
     {
-        public long Id { get; set; }
+        [JsonPropertyName("author")]
         public string Author { get; set; }
+
+        [JsonPropertyName("quote")]
         public string Quote { get; set; }
+
+        [JsonPropertyName("category")]
         public string Category { get; set; }
-        public string CreationTime { get; set; }
-        public string EditTime { get; set; }
+
+        [JsonIgnore]
+        public DateTime CreationTime { get; set; }
+        
+        [JsonIgnore]
+        public DateTime EditTime { get; set; }
     }
 }

@@ -11,43 +11,80 @@ namespace AlifQuotesAPI.Controllers
     [ApiController]
     public class QuotesController : ControllerBase
     {
-        public List<QuoteModel> Quotes;
-        public QuotesController()
+        private MyAppData _myService;
+
+        public QuotesController( MyAppData myService)
         {
-            Quotes = new List<QuoteModel>();
+           _myService = myService;
         }
 
-        // GET api/values
+        // GET api/quotes
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<List<QuoteModel>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _myService.Quotes;
         }
 
-        // GET api/values/5
+        // GET by id api/quotes/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult<QuoteModel> Get(int id)
         {
-            return "value";
+            if (Exists(id))           
+            {
+                return _myService.Quotes[id];
+            }
+            return NotFound();
         }
 
-        // POST api/values
+        // GET by category api/quotes/category/abc
+        [HttpGet("category/{category}")]
+        public ActionResult<List<QuoteModel>> Get(string category)
+        {
+           return _myService.Quotes.FindAll((QuoteModel q) => { return q.Category.ToLower() == category.ToLower(); });      
+        }
+
+
+        // GET random api/quotes/random
+        [HttpGet("random")]
+        public ActionResult<QuoteModel> Random()
+        { 
+            int RandomId = new Random().Next(0, _myService.Quotes.Count);
+            return _myService.Quotes[RandomId];
+        }
+
+        // POST api/quotes
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] QuoteModel value)
         {
-          
+            value.CreationTime = DateTime.Now;
+            value.EditTime = DateTime.Now;
+            _myService.Quotes.Add(value);
         }
 
-        // PUT api/values/5
+        // PUT api/quotes/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] QuoteModel value)
         {
+            if (Exists(id)) 
+            {
+                _myService.Quotes[id] = value;
+            }
+            NotFound();
         }
 
-        // DELETE api/values/5
+        // DELETE api/quotes/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            if (Exists(id))
+            {
+                _myService.Quotes.RemoveAt(id);
+            }
+        }
+
+        private bool Exists(int id)
+        {
+            return (id < _myService.Quotes.Count && id > -1);
         }
     }
 }
