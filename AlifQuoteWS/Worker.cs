@@ -32,6 +32,7 @@ namespace AlifQuotesWS
                 var stringTask = client.DeleteAsync("https://localhost:44316/api/quotes/clear");
                 var msg = await stringTask;
                 Console.Write(msg);
+
                 await Task.Delay(5 * 60 * 1000, stoppingToken);
             }
         }
