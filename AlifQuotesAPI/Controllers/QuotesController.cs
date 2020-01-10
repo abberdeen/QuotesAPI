@@ -25,7 +25,7 @@ namespace AlifQuotesAPI.Controllers
             return _myService.quotes;
         }
 
-        // GET by id api/quotes/5
+        // GET api/quotes/5
         [HttpGet("{id}")]
         public ActionResult<QuoteModel> Get(int id)
         {
@@ -36,7 +36,7 @@ namespace AlifQuotesAPI.Controllers
             return NotFound();
         }
 
-        // GET by category api/quotes/category/abc
+        // GET api/quotes/category/abc
         [HttpGet("category/{category}")]
         public ActionResult<List<QuoteModel>> Get(string category)
         {
@@ -44,7 +44,7 @@ namespace AlifQuotesAPI.Controllers
         }
 
 
-        // GET random api/quotes/random
+        // GET api/quotes/random
         [HttpGet("random")]
         public ActionResult<QuoteModel> Random()
         {
