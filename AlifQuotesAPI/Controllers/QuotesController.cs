@@ -29,7 +29,7 @@ namespace AlifQuotesAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<QuoteModel> Get(int id)
         {
-            if (Exists(id))           
+            if (_myService.Exists(id))           
             {
                 return _myService.quotes[id];
             }
@@ -40,37 +40,31 @@ namespace AlifQuotesAPI.Controllers
         [HttpGet("category/{category}")]
         public ActionResult<List<QuoteModel>> Get(string category)
         {
-           return _myService.quotes.FindAll((QuoteModel q) => { return q.Category.ToLower() == category.ToLower(); });      
+            return _myService.QuotesByCategory(category);
         }
 
 
         // GET random api/quotes/random
         [HttpGet("random")]
         public ActionResult<QuoteModel> Random()
-        { 
-            int RandomId = new Random().Next(0, _myService.quotes.Count);
-            return _myService.quotes[RandomId];
+        {
+            return _myService.RandomQuote();
         }
 
         // POST api/quotes
         [HttpPost]
         public void Post([FromBody] QuoteModel value)
         {
-            value.CreationTime = DateTime.Now;
-            value.EditTime = DateTime.Now;
-            _myService.quotes.Add(value);
+            _myService.AddQuote(value);
         }
 
         // PUT api/quotes/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] QuoteModel value)
         {
-            if (Exists(id)) 
+            if (_myService.Exists(id)) 
             {
-                var creationTime = _myService.quotes[id].CreationTime;
-                _myService.quotes[id] = value;
-                _myService.quotes[id].EditTime = DateTime.Now;
-                _myService.quotes[id].CreationTime = creationTime;
+                _myService.UpdateQuote(id,value);
             }
             NotFound();
         }
@@ -79,7 +73,7 @@ namespace AlifQuotesAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            if (Exists(id))
+            if (_myService.Exists(id))
             {
                 _myService.quotes.RemoveAt(id);
             }
@@ -90,12 +84,7 @@ namespace AlifQuotesAPI.Controllers
         public void DeleteByOffset()
         { 
             _myService.quotes.RemoveAll(IsHourElapsed);
-        }
-
-        private bool Exists(int id)
-        {
-            return (id < _myService.quotes.Count && id > -1);
-        }
+        }     
 
         private bool IsHourElapsed(QuoteModel item) 
         {
