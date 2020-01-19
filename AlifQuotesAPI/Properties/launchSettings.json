@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AlifQuotesAPI": {
+    "QuotesAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/quotes",

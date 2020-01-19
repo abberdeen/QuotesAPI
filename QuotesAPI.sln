@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlifQuotesAPI", "AlifQuotesAPI\AlifQuotesAPI.csproj", "{14E06A32-DF3A-4FDB-8441-7E17FE114E39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotesAPI", "AlifQuotesAPI\QuotesAPI.csproj", "{14E06A32-DF3A-4FDB-8441-7E17FE114E39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlifQuotesWS", "AlifQuoteWS\AlifQuotesWS.csproj", "{7560CD55-7AA7-4F9C-86DC-02F7F7C74EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotesWS", "AlifQuoteWS\QuotesWS.csproj", "{7560CD55-7AA7-4F9C-86DC-02F7F7C74EAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

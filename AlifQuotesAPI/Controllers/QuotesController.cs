@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AlifQuotesAPI.Models;
+using QuotesAPI.Models;
 using Microsoft.AspNetCore.Mvc; 
 
-namespace AlifQuotesAPI.Controllers
+namespace QuotesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -42,7 +42,6 @@ namespace AlifQuotesAPI.Controllers
         {
             return _myService.QuotesByCategory(category);
         }
-
 
         // GET api/quotes/random
         [HttpGet("random")]

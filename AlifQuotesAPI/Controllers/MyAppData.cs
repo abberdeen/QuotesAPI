@@ -1,11 +1,11 @@
-﻿using AlifQuotesAPI.Models;
+﻿using QuotesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AlifQuotesAPI.Controllers
+namespace QuotesAPI.Controllers
 {
     /// <summary>
     /// For preserve user data and app state between requests.

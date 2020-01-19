@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AlifQuotesWS
+namespace QuotesWS
 {
     public class Worker : BackgroundService
     {
@@ -27,7 +27,7 @@ namespace AlifQuotesWS
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("AlifQuoteWS running at:{time}", DateTimeOffset.Now);
+                _logger.LogInformation("QuoteWS running at:{time}", DateTimeOffset.Now);
                         
                 var stringTask = client.DeleteAsync("https://localhost:44316/api/quotes/clear");
                 var msg = await stringTask;
