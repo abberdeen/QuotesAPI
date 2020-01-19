@@ -1,4 +1,4 @@
-# AlifQuotesAPI
+# QuotesAPI
 RESTful quotation management API with the following technical properties:
 * Language of development C# on .NET Core 3.1
 * JSON format is used to exchange data between the client and server
@@ -48,7 +48,7 @@ GET /api/quotes/random
 ```
 ## Worker service
 
-### AlifQuotesWS
+### QuotesWS
 Worker that wakes up every 5 minutes and deletes quotes that were created more than 1 hour ago.
 
 
